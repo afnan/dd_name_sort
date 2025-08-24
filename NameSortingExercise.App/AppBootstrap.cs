@@ -37,12 +37,12 @@ namespace NameSortingExercise.App;
 
         var parsed = raw.Select((line, i) => new { line, i })
                         .Select(x => _parser.TryParse(x.line, out var p)
-                            ? new { Ok = true, Person = p!, x.i, x.line }
+                            ? new { Ok = true, Person = p, x.i, x.line }                            
                             : new { Ok = false, Person = (Person?)null, x.i, x.line })
                         .ToList();
 
         foreach (var bad in parsed.Where(p => !p.Ok))
-            Console.Error.WriteLine($"Skipping invalid line {bad.i + 1}: '{bad.line}' (must be 2–4 tokens; last token is the surname)");
+            Console.Error.WriteLine($"Skipping invalid line {bad.i + 1}: '{bad.line}' (must be 2–4 Given names; last one is the surname)");
 
         var people = parsed.Where(p => p.Ok).Select(p => p.Person!).ToList();
         people.Sort(_comparer);

@@ -4,6 +4,6 @@ namespace NameSortingExercise.Core.Parsing
 {
     public interface INameParser
     {
-        bool TryParse(string line, out Person name);
+        bool TryParse(string line, out Person? name);
     }
 }

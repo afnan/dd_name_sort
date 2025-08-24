@@ -4,7 +4,7 @@ namespace NameSortingExercise.Core.Parsing
 {
     public sealed class NameParser : INameParser
     {
-        public bool TryParse(string line, out Person name)
+        public bool TryParse(string line, out Person? name)
         {
             name = null;
             if (string.IsNullOrWhiteSpace(line)) return false;

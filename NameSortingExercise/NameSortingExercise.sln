@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36401.2 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NameSortingExercise", "NameSortingExercise.csproj", "{7A2E031A-7502-4FEA-A4D2-2B6695A6EA92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NameSortingExercise.App", "NameSortingExercise.App.csproj", "{7A2E031A-7502-4FEA-A4D2-2B6695A6EA92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NameSortingExercise.Tests", "..\NameSortingExercise.Tests\NameSortingExercise.Tests.csproj", "{1D62F99A-686E-4CE0-B5C0-4E6EF8AFF29D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NameSortingExercise.Core", "..\NameSortingExercise.Core\NameSortingExercise.Core.csproj", "{7136C571-459F-4A03-A8D5-24E4ED27249E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{7A2E031A-7502-4FEA-A4D2-2B6695A6EA92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A2E031A-7502-4FEA-A4D2-2B6695A6EA92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A2E031A-7502-4FEA-A4D2-2B6695A6EA92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D62F99A-686E-4CE0-B5C0-4E6EF8AFF29D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D62F99A-686E-4CE0-B5C0-4E6EF8AFF29D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D62F99A-686E-4CE0-B5C0-4E6EF8AFF29D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D62F99A-686E-4CE0-B5C0-4E6EF8AFF29D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7136C571-459F-4A03-A8D5-24E4ED27249E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7136C571-459F-4A03-A8D5-24E4ED27249E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7136C571-459F-4A03-A8D5-24E4ED27249E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7136C571-459F-4A03-A8D5-24E4ED27249E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

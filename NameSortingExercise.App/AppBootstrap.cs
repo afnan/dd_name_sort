@@ -2,11 +2,11 @@
 using NameSortingExercise.Core.Domain;
 using NameSortingExercise.Core.Parsing;
 using NameSortingExercise.Infrastructure;
-using System;
 
 namespace NameSortingExercise.App;
-    public class AppBootstrap
-    {
+
+public class AppBootstrap
+{
     private readonly INameRepository _repo;
     private readonly INameParser _parser;
     private readonly System.Collections.Generic.IComparer<Person> _comparer;
@@ -35,16 +35,19 @@ namespace NameSortingExercise.App;
 
         var raw = await _repo.ReadAllAsync(inputPath);
 
+        // Parse each line; collect success/failure info for reporting
         var parsed = raw.Select((line, i) => new { line, i })
                         .Select(x => _parser.TryParse(x.line, out var p)
-                            ? new { Ok = true, Person = p, x.i, x.line }                            
+                            ? new { Ok = true, Person = p, x.i, x.line }
                             : new { Ok = false, Person = (Person?)null, x.i, x.line })
                         .ToList();
 
+        // only tell about any invalid lines rather than failing the whole run
         foreach (var bad in parsed.Where(p => !p.Ok))
             Console.Error.WriteLine($"Skipping invalid line {bad.i + 1}: '{bad.line}' (must be 2–4 Given names; last one is the surname)");
 
-        var people = parsed.Where(p => p.Ok).Select(p => p.Person!).ToList();
+        var people = parsed.Where(p => p.Ok && p.Person != null).Select(p => p.Person!).ToList();
+        // Sort by surname first; if same surname, sort by given names in order
         people.Sort(_comparer);
 
         foreach (var p in people) Console.WriteLine(p);

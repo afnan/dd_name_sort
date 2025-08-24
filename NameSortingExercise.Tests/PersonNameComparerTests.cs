@@ -8,12 +8,13 @@ public class PersonComparerTests
     private static Person N(string s)
     {
         var parts = s.Split(' ');
-        return new Person(parts[..^1], parts[^1]);
+        return Person.Create(parts[..^1], parts[^1]);
     }
 
-    [Fact]
+    [Fact(DisplayName = "Sorts by surname then given names")]
     public void Sorts_By_Family_Then_GivenNames()
     {
+        // Arrange
         var list = new[]
         {
                 N("Janet Parsons"),
@@ -21,8 +22,9 @@ public class PersonComparerTests
                 N("Marin Alvarez"),
                 N("Beau Tristan Bentley"),
             }.ToList();
-
+        // Act
         list.Sort(new PersonNameComparer());
+        // Assert
         Assert.Equal(new[]
         {
                 "Marin Alvarez",
@@ -32,11 +34,21 @@ public class PersonComparerTests
             }, list.Select(x => x.ToString()).ToArray());
     }
 
-    [Fact]
+    [Fact(DisplayName = "Shorter given-name list wins when prefix")]
     public void Shorter_GivenNames_Wins_When_Prefix()
     {
         var a = N("John A Smith");
         var b = N("John Adam Smith");
         Assert.True(new PersonNameComparer().Compare(a, b) < 0);
+    }
+
+    [Fact(DisplayName = "Comparer is case-insensitive and deterministic")]
+    public void Case_Insensitive_And_Deterministic()
+    {
+        var a = Person.Create(new[] { "vaughn" }, "lewis");
+        var b = Person.Create(new[] { "Vaughn" }, "Lewis");
+
+        var cmp = new PersonNameComparer();
+        Assert.Equal(0, cmp.Compare(a, b)); 
     }
 }

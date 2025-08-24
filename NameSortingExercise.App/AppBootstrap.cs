@@ -47,11 +47,15 @@ public class AppBootstrap
             Console.Error.WriteLine($"Skipping invalid line {bad.i + 1}: '{bad.line}' (must be 2–4 Given names; last one is the surname)");
 
         var people = parsed.Where(p => p.Ok && p.Person != null).Select(p => p.Person!).ToList();
-        // Sort by surname first; if same surname, sort by given names in order
+
+        // Sort by surname from (A→Z), and then by given names left-to-right;
+        // if all equal so far, fewer given names wins.
+        // Comparisons are case-insensitive, ordinal.
         people.Sort(_comparer);
 
         foreach (var p in people) Console.WriteLine(p);
 
+        // NOTE: File will be overwritten if it exists
         await _repo.WriteAllAsync("sorted-names-list.txt", people.Select(p => p.ToString()));
         return 0;
     }

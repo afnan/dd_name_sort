@@ -18,7 +18,7 @@ public sealed class NameParser : INameParser
 
         try
         {
-            name = new Person(given, family);
+            name = Person.Create(given, family);
             return true;
         }
         catch

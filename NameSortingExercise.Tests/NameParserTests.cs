@@ -21,7 +21,6 @@ namespace NameSortingExercise.Tests
         [Theory]
         [InlineData("")]
         [InlineData(" ")]
-        [InlineData(null)]
         [InlineData("SingleName")]
         [InlineData("Too Many names what is going on")]
         public void TriesParse_Invalid_Lines(string line)

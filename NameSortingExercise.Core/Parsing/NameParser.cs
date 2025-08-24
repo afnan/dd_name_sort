@@ -7,7 +7,24 @@ namespace NameSortingExercise.Core.Parsing
         public bool TryParse(string line, out Person name)
         {
             name = null;
-            return false; // stub: will guarantees tests will fail later (red)
+            if (string.IsNullOrWhiteSpace(line)) return false;
+            var possibleNames = line.Trim()
+                             .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                             .Select(t => t.Trim())
+                             .ToArray();
+            if (possibleNames.Length < 2 || possibleNames.Length > 4) return false;
+            var family = possibleNames[^1];
+            var given = possibleNames.Take(possibleNames.Length - 1);
+
+            try
+            {
+                name = new Person(given, family);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

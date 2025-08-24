@@ -1,0 +1,48 @@
+name: .NET Build & Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    name: Build & Test (matrix)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        dotnet: ['9.0.x']  # because app is made to be working on 9
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK ${{ matrix.dotnet }}
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+
+      - name: Print dotnet info
+        run: dotnet --info
+
+        # Using fixed solution name for now. It could come from environment but not in scope 
+      - name: Restore
+        run: dotnet restore NameSortingExercise.sln
+
+      - name: Build (Release)
+        run: dotnet build NameSortingExercise.sln --no-restore -c Release
+
+      - name: Test (with coverage)
+        run: dotnet test NameSortingExercise.sln --no-build -c Release --collect:"XPlat Code Coverage" --logger "trx;LogFileName=test-results.trx"
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}
+          path: |
+            **/TestResults/*.trx
+            **/TestResults/**/coverage.cobertura.xml

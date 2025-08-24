@@ -15,6 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NameSortingExercise.App\NameSortingExercise.App.csproj" />
+    <ProjectReference Include="..\NameSortingExercise.Core\NameSortingExercise.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 

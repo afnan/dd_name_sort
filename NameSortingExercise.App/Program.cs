@@ -13,7 +13,7 @@ var services = new ServiceCollection()
     .AddSingleton<INameRepository, FileNameRepository>()
     // domain services from Core
     .AddSingleton<INameParser, NameParser>()
-    .AddSingleton<System.Collections.Generic.IComparer<Person>, PersonNameComparer>()
+    .AddSingleton<IComparer<Person>, PersonNameComparer>()
     .BuildServiceProvider();
 
 var app = services.GetRequiredService<AppBootstrap>();

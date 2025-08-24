@@ -8,7 +8,7 @@ public class PersonComparerTests
     private static Person N(string s)
     {
         var parts = s.Split(' ');
-        return new Person(parts[..^1], parts[^1]);
+        return Person.Create(parts[..^1], parts[^1]);
     }
 
     [Fact]

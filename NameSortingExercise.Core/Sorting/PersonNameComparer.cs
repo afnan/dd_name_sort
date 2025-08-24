@@ -3,7 +3,7 @@ using NameSortingExercise.Core.Domain;
 
 namespace NameSortingExercise.Core.Sorting;
 /// Compares two Person objects by surname first, then by given names.
-public class PersonNameComparer : IComparer<Person>
+public sealed class PersonNameComparer : IComparer<Person>
 {
     private static readonly StringComparer Cmp = StringComparer.OrdinalIgnoreCase;
     public int Compare(Person? x, Person? y)

@@ -10,6 +10,8 @@ namespace NameSortingExercise
     {
         static void Main(string[] args)
         {
+            Console.Error.WriteLine("Usage: name-sorter <path-to-unsorted-names-list.txt>");
+            
         }
     }
 }
